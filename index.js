@@ -55,3 +55,20 @@ console.log('index.js');
         console.log(geass);
     });
 }).call(this);
+
+
+(function() {
+    //プロミスを返さないメソッドを手動でプロミスを返す非同期メソッドにする
+    function test() {
+        //すぐにプロミスを返す関数を作成する
+        return new Promise((resolve, reject) => {
+            //プロミスのコンストラクタの引数に実行したい非同期の処理を記述する
+            setTimeout(() => {
+                resolve('成功') //非同期処理の結果得たものをresolveに格納する
+            }, 2000);
+        });
+    }
+
+    //testメソッドはプロミスを返すようになり、thenメソッドも使用できるようになる
+    test().then((resolve) => console.log(resolve)); //resolveに格納したものはthenメソッドの引数で受け取れる
+}).call(this);
